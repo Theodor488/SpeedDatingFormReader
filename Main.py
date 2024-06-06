@@ -6,7 +6,7 @@ from azure.core.credentials import AzureKeyCredential
 
 # Configuration
 endpoint = "https://speeddatingformreader.cognitiveservices.azure.com/"
-api_key = "f428313cc73440739e94d52e1a1a0f49"  # Use either KEY 1 or KEY 2
+api_key = os.getenv("AZURE_API_KEY")  # Access the API key from environment variables
 form_path = "C:/Users/theod/Pictures/Matches"  # Path to form images
 
 # Initialize the client
@@ -27,7 +27,7 @@ async def main():
 
     for image in os.listdir(form_path):
         if (image.endswith(".jpg")):
-            image_path = form_path + '/' + image
+            image_path = os.path.join(form_path, image)
             tasks.append(process_image(image_path, client, info_extractor))
     
     results = await asyncio.gather(*tasks)
@@ -36,7 +36,8 @@ async def main():
         # get name
         name = infoExractor.extractName(result)
         # Get results for each name
-        infoExractor.GetResultsForName(result, name, results_dict)
+        if name:
+            infoExractor.GetResultsForName(result, name, results_dict)
         
     matches_dict = {}
     

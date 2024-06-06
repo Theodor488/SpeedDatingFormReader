@@ -19,6 +19,7 @@ class FormInfoExtractor:
             if cell['kind'] == 'columnHeader' and cell['content'].lower() == column_name.lower():
                 name_column_index = cell['column_index']
                 break
+
         # Second pass: Extract values based on the identified column index
         for cell in table_data:
             if cell['kind'] == 'content' and cell['column_index'] == name_column_index:
@@ -62,13 +63,9 @@ class FormInfoExtractor:
     def CalculateMatches(self, results_dict, name, matches_dict, match_person):
         # determine if name is within potential match pool
         if name != match_person and name in results_dict[match_person]:
+
             # if there is a match
             if results_dict[name][match_person] == "Yes" and results_dict[match_person][name] == "Yes":
-                if (name in matches_dict):
-                    if match_person not in matches_dict[name]:
-                        matches_dict[name].append(match_person)
-                else:
-                    if name not in matches_dict:
-                        matches_dict[name] = [match_person]
-                    else:
-                        matches_dict[name].Append(match_person)
+                if name not in matches_dict:
+                        matches_dict[name] = []
+                matches_dict[name].append(match_person)
