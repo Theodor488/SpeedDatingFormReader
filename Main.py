@@ -5,9 +5,9 @@ from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 
 # Configuration
-endpoint = "https://speeddatingformreader.cognitiveservices.azure.com/"
-api_key = os.getenv("AZURE_API_KEY")  # Access the API key from environment variables
-form_path = "C:/Users/theod/Pictures/Matches"  # Path to form images
+endpoint = os.getenv("FORM_RECOGNIZER_ENDPOINT") # Access the Ednpoint from environment variables
+api_key = os.getenv("FORM_RECOGNIZER_API_KEY")  # Access the API key from environment variables
+form_path = "C:/Users/theod/Pictures/Matches"  # Path to form images inside the container
 
 # Initialize the client
 client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(api_key))
@@ -48,6 +48,5 @@ async def main():
     
     print(matches_dict)
 
-        
 if __name__ == "__main__":
     asyncio.run(main())
