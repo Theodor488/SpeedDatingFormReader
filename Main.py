@@ -7,7 +7,7 @@ from azure.core.credentials import AzureKeyCredential
 # Configuration
 endpoint = os.getenv("FORM_RECOGNIZER_ENDPOINT") # Access the Ednpoint from environment variables
 api_key = os.getenv("FORM_RECOGNIZER_API_KEY")  # Access the API key from environment variables
-form_path = "C:/Users/theod/Pictures/Matches"  # Path to form images inside the container
+form_path = "C:/Users/theod/Pictures/Matches"  # Path to images of forms
 
 # Initialize the client
 client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(api_key))
